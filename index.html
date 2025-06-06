@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dylantic Church Documents</title>
+<style>
+  /* Base font and layout */
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    background: #1c2331; /* dark navy background */
+    color: #e0e6f0;       /* light text */
+    line-height: 1.6;
+  }
+
+  /* Banner with original bluish-black background */
+  .banner {
+    width: 100%;
+    height: 140px;
+    background-color: #0b121f; /* original bluish-black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    margin-bottom: 3rem;
+  }
+  .banner img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 14px;
+  }
+
+  /* Page title */
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #70a1ff; /* soft blue accent */
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Document sections */
+  .doc-section {
+    background: #222c44;
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 3.5rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+  }
+  .doc-section:hover {
+    background-color: #2d3a63;
+  }
+
+  /* Section headings */
+  .doc-section h2 {
+    margin-top: 0;
+    font-size: 1.75rem;
+    color: #a0c4ff;
+    border-bottom: 2px solid #70a1ff;
+    padding-bottom: 0.35rem;
+    transition: color 0.3s ease;
+  }
+  .doc-section:hover h2 {
+    color: #c1d9ff;
+  }
+
+  /* Document descriptions */
+  .doc-desc {
+    font-size: 1rem;
+    color: #b0b9d4;
+    margin-top: 0.5rem;
+    font-style: italic;
+    user-select: none;
+  }
+
+  /* Embedded PDF iframes */
+  iframe {
+    width: 100%;
+    height: 620px;
+    border: 1px solid #4a5a8a;
+    box-shadow: 0 4px 14px rgba(20, 30, 70, 0.7);
+    background: #121726;
+    margin-top: 1.25rem;
+    border-radius: 14px;
+    display: block;
+  }
+
+  /* Responsive design for smaller screens */
+  @media (max-width: 700px) {
+    body {
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    .doc-section h2 {
+      font-size: 1.4rem;
+    }
+    iframe {
+      height: 500px;
+    }
+  }
+
+  /* Footer style */
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #5b6788;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+  <div class="banner">
+    <img src="/home/dylan/Documents/church images/Dylantic logo.png" alt="Dylantic Church Logo" />
+  </div>
+
+  <h1>Dylantic Church Documents</h1>
+
+  <div class="doc-section">
+    <h2>The Dylantic Creed</h2>
+    <p class="doc-desc">The foundational statement of faith and doctrine for the Dylantic Church.</p>
+    <iframe src="/home/dylan/Documents/church pdfs/The Dylantic Creed.pdf"></iframe>
+  </div>
+
+  <div class="doc-section">
+    <h2>More from The Dylantic Creed</h2>
+    <iframe src="/home/dylan/Documents/church pdfs/more form The Dylantic Creed.pdf"></iframe>
+  </div>
+
+  <div class="doc-section">
+    <h2>Extended Dogma for the Dylantic Church</h2>
+    <iframe src="/home/dylan/Documents/church pdfs/extended Dogma for the Dylantic church.pdf"></iframe>
+  </div>
+
+  <div class="doc-section">
+    <h2>Dylantic Church Clergy Marriage and Celibacy Policy</h2>
+    <p class="doc-desc">Policies regarding clergy marriage, celibacy, and related pastoral guidelines.</p>
+    <iframe src="/home/dylan/Documents/church pdfs/Dylantic Church Clergy Marriage and Celibacy Policy.pdf"></iframe>
+  </div>
+
+  <div class="doc-section">
+    <h2>Dylantic Bible Canon (85 books)</h2>
+    <p class="doc-desc">The complete canon of scripture as recognized by the Dylantic Church.</p>
+    <iframe src="/home/dylan/Documents/church pdfs/Dylantic Bible Canon (85 books).pdf"></iframe>
+  </div>
+
+  <div class="doc-section">
+    <h2>Dylantic Bible sources</h2>
+    <p class="doc-desc">Details the biblical texts and versions used as references to compile the Dylantic Bible canon.</p>
+    <iframe src="/home/dylan/Documents/church pdfs/Dylantic Bible sourses.pdf"></iframe>
+  </div>
+
+  <div class="doc-section">
+    <h2>To Correct the Misunderstanding</h2>
+    <p class="doc-desc">A detailed rebuke addressing common Protestant criticisms of Catholicism and Orthodoxy.</p>
+    <iframe src="/home/dylan/Documents/church pdfs/to correct the misunderstanding.pdf"></iframe>
+  </div> 
+
+  <div class="doc-section">
+    <h2>The Dylantic Church's Critique on Pope Francis</h2>
+    <iframe src="/home/dylan/Documents/church pdfs/The Dylantic church's critique on Pope Francis.pdf"></iframe>
+  </div>
+
+ <div class="doc-section">
+    <h2>The Dylantic declaration</h2>
+    <p class="doc-desc">The Dylantic Church’s Declaration Against Apostate Religions and Modern Deceptions.</p>
+    <iframe src="/home/dylan/Documents/church pdfs/The Dylantic declaration.pdf"></iframe>
+  </div> 
+
+
+  <div class="doc-section">
+    <h2>The Dylantic Apocalypse Clauses</h2>
+    <p class="doc-desc">Includes emergency codes for apocalyptic scenarios.</p>
+    <iframe src="/home/dylan/Documents/church pdfs/the Dylantic apocalypse clauses.pdf"></iframe>
+  </div>
+
+  <footer>
+    &copy; 2025 The Dylantic Church. All rights reserved.
+  </footer>
+
+</body>
+</html>
