@@ -1,192 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dylantic Church Documents</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 2rem;
-      background-color: var(--bg-color, #1c2331);
-      color: var(--text-color, #e0e6f0);
-      transition: all 0.3s ease;
-    }
-
-    .mode-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.5rem 1rem;
-      background: #70a1ff;
-      border: none;
-      color: #000;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 999;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    }
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dylantic Church Documents</title>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    background: #1c2331;
+    color: #e0e6f0;
+    line-height: 1.6;
+  }
+  .banner {
+    width: 100%;
+    height: 140px;
+    background-color: #0b121f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    margin-bottom: 3rem;
+  }
+  .banner img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 14px;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #70a1ff;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  }
+  .mode-toggle {
+    display: block;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .mode-toggle button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background: #3d5afe;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .doc-section {
+    background: #222c44;
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 3.5rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+  }
+  .doc-section h2 {
+    margin-top: 0;
+    font-size: 1.75rem;
+    color: #a0c4ff;
+    border-bottom: 2px solid #70a1ff;
+    padding-bottom: 0.35rem;
+  }
+  .doc-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .doc-links a {
+    background: #3d5afe;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+  }
+  iframe {
+    width: 100%;
+    height: 620px;
+    border: 1px solid #4a5a8a;
+    background: #121726;
+    border-radius: 14px;
+    display: block;
+    margin-top: 1rem;
+  }
+  .mobile iframe {
+    height: 520px;
+  }
+  @media (max-width: 700px) {
     h1 {
-      text-align: center;
-      color: #70a1ff;
-      margin-bottom: 2rem;
+      font-size: 2rem;
     }
-
-    .doc-section {
-      background-color: #222c44;
-      padding: 1.5rem;
-      border-radius: 14px;
-      margin-bottom: 3rem;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-    }
-
     .doc-section h2 {
-      margin-top: 0;
-      color: #a0c4ff;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
-
-    .viewer {
-      margin-top: 1rem;
-      width: 100%;
-      height: 600px;
-      border: none;
-      border-radius: 8px;
+    iframe {
+      height: 500px;
     }
-
-    .download-link {
-      display: inline-block;
-      margin-top: 0.75rem;
-      padding: 0.5rem 1rem;
-      background: #4a5a8a;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: background 0.2s;
-    }
-
-    .download-link:hover {
-      background: #647bbd;
-    }
-
-    .mobile-mode body {
-      --bg-color: #fff;
-      --text-color: #111;
-    }
-
-    .mobile-mode h1 {
-      color: #222;
-    }
-
-    .mobile-mode .doc-section {
-      background-color: #f0f2f8;
-      color: #111;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .mobile-mode .doc-section h2 {
-      color: #333;
-    }
-
-    .mobile-mode .download-link {
-      background: #3a5ad0;
-    }
-  </style>
-</head>
-<body>
-  
-  <div class="banner">
-    <img src="assets/dylantic-logo.png" alt="Dylantic Church Logo" />
-  </div>
-  
-<button class="mode-toggle" onclick="toggleMode()">Switch Mode</button>
-<h1>Dylantic Church Documents</h1>
-
+  }
+</style>
 <script>
   function toggleMode() {
-    document.body.classList.toggle("mobile-mode");
+    document.body.classList.toggle("mobile");
   }
 </script>
+</head>
+<body>
 
-<!-- Document 1 -->
-<div class="doc-section">
-  <h2>The Dylantic Creed</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" download>Download PDF</a>
+<div class="banner">
+  <img src="assets/dylantic-logo.png" alt="Dylantic Church Logo" />
 </div>
 
-<!-- Document 2 -->
-<div class="doc-section">
-  <h2>More from the Dylantic Creed</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/more-from-the-dylantic-creed.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/more-from-the-dylantic-creed.pdf" download>Download PDF</a>
+<h1>Dylantic Church Documents</h1>
+
+<div class="mode-toggle">
+  <button onclick="toggleMode()">Toggle Mobile/Desktop Mode</button>
 </div>
 
-<!-- Document 3 -->
-<div class="doc-section">
-  <h2>The Dylantic Declaration</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/the-dylantic-declaration.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/the-dylantic-declaration.pdf" download>Download PDF</a>
-</div>
+<script>
+  const docs = [
+    { title: "The Dylantic Creed", file: "dylantic-creed.pdf" },
+    { title: "More from the Dylantic Creed", file: "more-from-the-dylantic-creed.pdf" },
+    { title: "The Dylantic Declaration", file: "the-dylantic-declaration.pdf" },
+    { title: "Extended Dogma for the Dylantic Church", file: "extended-dogma-for-the-dylantic-church.pdf" },
+    { title: "Dylantic Clergy Marriage and Celibacy Policy", file: "dylantic-clergy-marriage-and-celibacy-policy.pdf" },
+    { title: "Dylantic Bible Canon", file: "dylantic-bible-canon.pdf" },
+    { title: "Dylantic Bible Sources", file: "dylantic-bible-sources.pdf" },
+    { title: "Dylantic Liturgy (All-English Rite)", file: "dylantic-liturgy-all-english-rite.pdf" },
+    { title: "To Correct the Misunderstanding", file: "to-correct-the-misunderstanding.pdf" },
+    { title: "Critique on Pope Francis", file: "critique-on-pope-francis.pdf" },
+    { title: "The Dylantic Apocalypse Clauses", file: "the-dylantic-apocalypse-clauses.pdf" },
+  ];
 
-<!-- Document 4 -->
-<div class="doc-section">
-  <h2>Extended Dogma for the Dylantic Church</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/extended-dogma-for-the-dylantic-church.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/extended-dogma-for-the-dylantic-church.pdf" download>Download PDF</a>
-</div>
-
-<!-- Document 5 -->
-<div class="doc-section">
-  <h2>Clergy Marriage and Celibacy Policy</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-clergy-marriage-and-celibacy-policy.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-clergy-marriage-and-celibacy-policy.pdf" download>Download PDF</a>
-</div>
-
-<!-- Document 6 -->
-<div class="doc-section">
-  <h2>Dylantic Bible Canon (85 Books)</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-bible-canon.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-bible-canon.pdf" download>Download PDF</a>
-</div>
-
-<!-- Document 7 -->
-<div class="doc-section">
-  <h2>Dylantic Bible Sources</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-bible-sources.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-bible-sources.pdf" download>Download PDF</a>
-</div>
-
-<!-- Document 8 -->
-<div class="doc-section">
-  <h2>The Dylantic Liturgy (All-English Rite)</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-liturgy-all-english-rite.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-liturgy-all-english-rite.pdf" download>Download PDF</a>
-</div>
-
-<!-- Document 9 -->
-<div class="doc-section">
-  <h2>To Correct the Misunderstanding</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/to-correct-the-misunderstanding.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/to-correct-the-misunderstanding.pdf" download>Download PDF</a>
-</div>
-
-<!-- Document 10 -->
-<div class="doc-section">
-  <h2>Critique on Pope Francis</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/critique-on-pope-francis.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/critique-on-pope-francis.pdf" download>Download PDF</a>
-</div>
-
-<!-- Document 11 -->
-<div class="doc-section">
-  <h2>The Dylantic Apocalypse Clauses</h2>
-  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/the-dylantic-apocalypse-clauses.pdf&embedded=true"></iframe>
-  <a class="download-link" href="https://the-dylantic-church.github.io/assets/the-dylantic-apocalypse-clauses.pdf" download>Download PDF</a>
-</div>
+  docs.forEach((doc, index) => {
+    document.write(`
+    <div class="doc-section">
+      <h2>Document ${index + 1}: ${doc.title}</h2>
+      <iframe src="https://docs.google.com/gview?embedded=true&url=https://the-dylantic-church.github.io/assets/${doc.file}"></iframe>
+      <div class="doc-links">
+        <a href="assets/${doc.file}" download>Download</a>
+        <a href="assets/${doc.file}" target="_blank">Open in New Tab</a>
+      </div>
+    </div>
+    `);
+  });
+</script>
 
 </body>
 </html>
