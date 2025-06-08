@@ -1,246 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dylantic Church Documents</title>
-<style>
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #1c2331;
-    color: #e0e6f0;
-    max-width: 960px;
-    margin: 3rem auto;
-    padding: 0 1.5rem;
-    line-height: 1.6;
-    transition: all 0.3s ease;
-  }
-
-  .banner {
-    height: 140px;
-    background-color: #0b121f;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 14px;
-    margin-bottom: 2rem;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-  }
-  .banner img {
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 14px;
-  }
-  h1 {
-    font-size: 2.5rem;
-    color: #70a1ff;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .doc-section {
-    background: #222c44;
-    padding: 1.5rem;
-    border-radius: 14px;
-    margin-bottom: 3rem;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-  }
-  .doc-section h2 {
-    color: #a0c4ff;
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #70a1ff;
-    padding-bottom: 0.3rem;
-  }
-  .doc-buttons {
-    margin: 1rem 0;
-  }
-  .doc-buttons a {
-    display: inline-block;
-    margin-right: 1rem;
-    padding: 0.5rem 1rem;
-    background: #70a1ff;
-    color: #101624;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  iframe {
-    width: 100%;
-    height: 600px;
-    border: none;
-    margin-top: 1rem;
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-    transition: height 0.3s ease;
-  }
-
-  #toggle-mode {
-    display: block;
-    margin: 2rem auto;
-    padding: 0.6rem 1.5rem;
-    background: #4c6ef5;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-
-  /* Mobile mode simulation */
-  body.mobile h1 {
-    font-size: 1.6rem;
-  }
-  body.mobile iframe {
-    height: 400px !important;
-  }
-  body.mobile .doc-section {
-    padding: 1rem;
-  }
-  body.mobile .doc-section h2 {
-    font-size: 1.3rem;
-  }
-</style>
-
-<script>
-  function toggleViewMode() {
-    const body = document.body;
-    const toggleBtn = document.getElementById("toggle-mode");
-    body.classList.toggle("mobile");
-    if (body.classList.contains("mobile")) {
-      toggleBtn.textContent = "Switch to Desktop Mode";
-    } else {
-      toggleBtn.textContent = "Switch to Mobile Mode";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dylantic Church Documents</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: var(--bg-color, #1c2331);
+      color: var(--text-color, #e0e6f0);
+      transition: all 0.3s ease;
     }
-  }
-</script>
+
+    .mode-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      background: #70a1ff;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      text-align: center;
+      color: #70a1ff;
+      margin-bottom: 2rem;
+    }
+
+    .doc-section {
+      background-color: #222c44;
+      padding: 1.5rem;
+      border-radius: 14px;
+      margin-bottom: 3rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    .doc-section h2 {
+      margin-top: 0;
+      color: #a0c4ff;
+      font-size: 1.6rem;
+    }
+
+    .viewer {
+      margin-top: 1rem;
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .download-link {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.5rem 1rem;
+      background: #4a5a8a;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .download-link:hover {
+      background: #647bbd;
+    }
+
+    .mobile-mode body {
+      --bg-color: #fff;
+      --text-color: #111;
+    }
+
+    .mobile-mode h1 {
+      color: #222;
+    }
+
+    .mobile-mode .doc-section {
+      background-color: #f0f2f8;
+      color: #111;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-mode .doc-section h2 {
+      color: #333;
+    }
+
+    .mobile-mode .download-link {
+      background: #3a5ad0;
+    }
+  </style>
 </head>
 <body>
 
-<div class="banner">
-  <img src="assets/dylantic-logo.png" alt="Dylantic Church Logo" />
-</div>
-
-<button id="toggle-mode" onclick="toggleViewMode()">Switch to Mobile Mode</button>
+<button class="mode-toggle" onclick="toggleMode()">Switch Mode</button>
 <h1>Dylantic Church Documents</h1>
 
-<button id="toggle-mode" onclick="toggleViewMode()">Toggle Mobile/Desktop View</button>
+<script>
+  function toggleMode() {
+    document.body.classList.toggle("mobile-mode");
+  }
+</script>
 
-<!-- Template Start -->
+<!-- Document 1 -->
 <div class="doc-section">
   <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" download>Download PDF</a>
 </div>
 
-<h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 2 -->
+<div class="doc-section">
+  <h2>More from the Dylantic Creed</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/more-from-the-dylantic-creed.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/more-from-the-dylantic-creed.pdf" download>Download PDF</a>
 </div>
 
-
-<h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 3 -->
+<div class="doc-section">
+  <h2>The Dylantic Declaration</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/the-dylantic-declaration.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/the-dylantic-declaration.pdf" download>Download PDF</a>
 </div>
 
-
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 4 -->
+<div class="doc-section">
+  <h2>Extended Dogma for the Dylantic Church</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/extended-dogma-for-the-dylantic-church.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/extended-dogma-for-the-dylantic-church.pdf" download>Download PDF</a>
 </div>
 
-
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 5 -->
+<div class="doc-section">
+  <h2>Clergy Marriage and Celibacy Policy</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-clergy-marriage-and-celibacy-policy.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-clergy-marriage-and-celibacy-policy.pdf" download>Download PDF</a>
 </div>
 
-
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 6 -->
+<div class="doc-section">
+  <h2>Dylantic Bible Canon (85 Books)</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-bible-canon.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-bible-canon.pdf" download>Download PDF</a>
 </div>
 
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 7 -->
+<div class="doc-section">
+  <h2>Dylantic Bible Sources</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-bible-sources.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-bible-sources.pdf" download>Download PDF</a>
 </div>
 
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 8 -->
+<div class="doc-section">
+  <h2>The Dylantic Liturgy (All-English Rite)</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/dylantic-liturgy-all-english-rite.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/dylantic-liturgy-all-english-rite.pdf" download>Download PDF</a>
 </div>
 
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 9 -->
+<div class="doc-section">
+  <h2>To Correct the Misunderstanding</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/to-correct-the-misunderstanding.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/to-correct-the-misunderstanding.pdf" download>Download PDF</a>
 </div>
 
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 10 -->
+<div class="doc-section">
+  <h2>Critique on Pope Francis</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/critique-on-pope-francis.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/critique-on-pope-francis.pdf" download>Download PDF</a>
 </div>
 
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
+<!-- Document 11 -->
+<div class="doc-section">
+  <h2>The Dylantic Apocalypse Clauses</h2>
+  <iframe class="viewer" src="https://docs.google.com/gview?url=https://the-dylantic-church.github.io/assets/the-dylantic-apocalypse-clauses.pdf&embedded=true"></iframe>
+  <a class="download-link" href="https://the-dylantic-church.github.io/assets/the-dylantic-apocalypse-clauses.pdf" download>Download PDF</a>
 </div>
-
-   <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
-</div>
-
-  <h2>The Dylantic Creed</h2>
-  <div class="doc-buttons">
-    <a href="https://the-dylantic-church.github.io/assets/dylantic-creed.pdf" target="_blank">Download PDF</a>
-    <a href="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true" target="_blank">Open in New Tab</a>
-  </div>
-  <iframe src="https://docs.google.com/viewer?url=https://the-dylantic-church.github.io/assets/dylantic-creed.pdf&embedded=true"></iframe>
-</div>
-
-<!-- Template End -->
-
-<!-- Repeat the above <div class="doc-section">...</div> block for each document -->
-<!-- Just change the title and file URL for each one -->
 
 </body>
 </html>
-
