@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dylantic Church Documents</title>
+<title>Home</title>
 <style>
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -120,40 +120,31 @@
   <img src="assets/dylantic-logo.png" alt="Dylantic Church Logo" />
 </div>
 
-<h1>Dylantic Church Documents</h1>
+<h1>Dylantic Church Home</h1>
 
 <div class="mode-toggle">
-  <button onclick="toggleMode()">Toggle Mobile/Desktop Mode</button>
+  <button onclick="toggleMode()">Toggle Mobile Mode</button>
 </div>
 
-<script>
-  const docs = [
-    { title: "The Dylantic Creed", file: "dylantic-creed.pdf" },
-    { title: "More from the Dylantic Creed", file: "more-from-the-dylantic-creed.pdf" },
-    { title: "The Dylantic Declaration", file: "the-dylantic-declaration.pdf" },
-    { title: "Extended Dogma for the Dylantic Church", file: "extended-dogma-for-the-dylantic-church.pdf" },
-    { title: "Dylantic Clergy Marriage and Celibacy Policy", file: "dylantic-clergy-marriage-and-celibacy-policy.pdf" },
-    { title: "Dylantic Bible Canon", file: "dylantic-bible-canon.pdf" },
-    { title: "Dylantic Bible Sources", file: "dylantic-bible-sources.pdf" },
-    { title: "Dylantic Liturgy (All-English Rite)", file: "dylantic-liturgy-all-english-rite.pdf" },
-    { title: "To Correct the Misunderstanding", file: "to-correct-the-misunderstanding.pdf" },
-    { title: "Critique on Pope Francis", file: "critique-on-pope-francis.pdf" },
-    { title: "The Dylantic Apocalypse Clauses", file: "the-dylantic-apocalypse-clauses.pdf" },
-  ];
+<div class="doc-section">
+  <h2>Church Documents</h2>
+  <div class="doc-links">
+    <a href="assets/documents.html">View Documents</a>
+  </div>
+</div>
 
-  docs.forEach((doc, index) => {
-    document.write(`
-    <div class="doc-section">
-      <h2>Document ${index + 1}: ${doc.title}</h2>
-      <iframe src="https://docs.google.com/gview?embedded=true&url=https://the-dylantic-church.github.io/assets/${doc.file}"></iframe>
-      <div class="doc-links">
-        <a href="assets/${doc.file}" download>Download</a>
-        <a href="assets/${doc.file}" target="_blank">Open in New Tab</a>
-      </div>
-    </div>
-    `);
-  });
-</script>
+<div class="doc-section">
+  <h2>Church Videos</h2>
+  <div class="doc-links">
+    <a href="assets/videos.html">Watch Videos</a>
+  </div>
+</div>
+
+<div class="doc-section">
+  <h2>Live Broadcast</h2>
+  <p>Watch the live stream or special event broadcast below:</p>
+  <iframe src="assets/live.html" title="Live Stream"></iframe>
+</div>
 
 </body>
 </html>
