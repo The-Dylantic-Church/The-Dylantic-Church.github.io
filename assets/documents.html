@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dylantic Church Documents</title>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    background: #1c2331;
+    color: #e0e6f0;
+    line-height: 1.6;
+  }
+  .banner {
+    width: 100%;
+    height: 140px;
+    background-color: #0b121f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    margin-bottom: 3rem;
+  }
+  .banner img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 14px;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #70a1ff;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  }
+  .mode-toggle {
+    display: block;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .mode-toggle button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background: #3d5afe;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .doc-section {
+    background: #222c44;
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 3.5rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+  }
+  .doc-section h2 {
+    margin-top: 0;
+    font-size: 1.75rem;
+    color: #a0c4ff;
+    border-bottom: 2px solid #70a1ff;
+    padding-bottom: 0.35rem;
+  }
+  .doc-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .doc-links a {
+    background: #3d5afe;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+  }
+  iframe {
+    width: 100%;
+    height: 620px;
+    border: 1px solid #4a5a8a;
+    background: #121726;
+    border-radius: 14px;
+    display: block;
+    margin-top: 1rem;
+  }
+  .mobile iframe {
+    height: 520px;
+  }
+  @media (max-width: 700px) {
+    h1 {
+      font-size: 2rem;
+    }
+    .doc-section h2 {
+      font-size: 1.4rem;
+    }
+    iframe {
+      height: 500px;
+    }
+  }
+</style>
+<script>
+  function toggleMode() {
+    document.body.classList.toggle("mobile");
+  }
+</script>
+</head>
+<body>
+
+<div class="banner">
+  <img src="assets/dylantic-logo.png" alt="Dylantic Church Logo" />
+</div>
+
+<h1>Dylantic Church Documents</h1>
+
+<div class="mode-toggle">
+  <button onclick="toggleMode()">Toggle Mobile/Desktop Mode</button>
+</div>
+
+<script>
+  const docs = [
+    { title: "The Dylantic Creed", file: "dylantic-creed.pdf" },
+    { title: "More from the Dylantic Creed", file: "more-from-the-dylantic-creed.pdf" },
+    { title: "The Dylantic Declaration", file: "the-dylantic-declaration.pdf" },
+    { title: "Extended Dogma for the Dylantic Church", file: "extended-dogma-for-the-dylantic-church.pdf" },
+    { title: "Dylantic Clergy Marriage and Celibacy Policy", file: "dylantic-clergy-marriage-and-celibacy-policy.pdf" },
+    { title: "Dylantic Bible Canon", file: "dylantic-bible-canon.pdf" },
+    { title: "Dylantic Bible Sources", file: "dylantic-bible-sources.pdf" },
+    { title: "Dylantic Liturgy (All-English Rite)", file: "dylantic-liturgy-all-english-rite.pdf" },
+    { title: "To Correct the Misunderstanding", file: "to-correct-the-misunderstanding.pdf" },
+    { title: "Critique on Pope Francis", file: "critique-on-pope-francis.pdf" },
+    { title: "The Dylantic Apocalypse Clauses", file: "the-dylantic-apocalypse-clauses.pdf" },
+  ];
+
+  docs.forEach((doc, index) => {
+    document.write(`
+    <div class="doc-section">
+      <h2>Document ${index + 1}: ${doc.title}</h2>
+      <iframe src="https://docs.google.com/gview?embedded=true&url=https://the-dylantic-church.github.io/assets/${doc.file}"></iframe>
+      <div class="doc-links">
+        <a href="assets/${doc.file}" download>Download</a>
+        <a href="assets/${doc.file}" target="_blank">Open in New Tab</a>
+      </div>
+    </div>
+    `);
+  });
+</script>
+
+</body>
+</html>
