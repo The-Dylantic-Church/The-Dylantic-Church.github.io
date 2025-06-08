@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Church Videos</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #1c2331;
+      color: #e0e6f0;
+      max-width: 960px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+    h1 {
+      color: #70a1ff;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .video-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    video {
+      width: 100%;
+      border-radius: 12px;
+      background: #000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    .video-title {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      color: #a0c4ff;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Church Videos</h1>
+
+<div class="video-section">
+  <div>
+    <video controls>
+      <source src="sermon1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-title">Sunday Sermon - Week 1</div>
+  </div>
+
+  <div>
+    <video controls>
+      <source src="sermon2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-title">Youth Night - Special Message</div>
+  </div>
+</div>
+
+</body>
+</html>
