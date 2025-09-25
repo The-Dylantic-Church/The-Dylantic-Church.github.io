@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" id="viewportMeta" />
 <title>Dylantic Church Documents</title>
 <style>
   body {
@@ -13,24 +13,7 @@
     background: #1c2331;
     color: #e0e6f0;
     line-height: 1.6;
-  }
-  .banner {
-    width: 100%;
-    height: 140px;
-    background-color: #0b121f;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-    margin-bottom: 3rem;
-  }
-  .banner img {
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-    border-radius: 14px;
+    transition: all 0.3s ease;
   }
   h1 {
     font-weight: 700;
@@ -93,7 +76,13 @@
     display: block;
     margin-top: 1rem;
   }
-  .mobile iframe {
+  /* Force mobile look */
+  body.mobile {
+    max-width: 420px;
+    margin: 1rem auto;
+    font-size: 0.95rem;
+  }
+  body.mobile iframe {
     height: 520px;
   }
   @media (max-width: 700px) {
@@ -109,9 +98,54 @@
   }
 </style>
 <script>
-  function toggleMode() {
-    document.body.classList.toggle("mobile");
+  // Detect if device is mobile
+  function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
+
+  // Apply mobile or desktop mode
+  function setMode(mode) {
+    const body = document.body;
+    const viewportMeta = document.getElementById("viewportMeta");
+    const button = document.getElementById("modeButton");
+
+    if (mode === "mobile") {
+      body.classList.add("mobile");
+      viewportMeta.setAttribute("content", "width=420, initial-scale=1");
+      button.textContent = "Switch to Desktop Mode";
+    } else {
+      body.classList.remove("mobile");
+      viewportMeta.setAttribute("content", "width=device-width, initial-scale=1");
+      button.textContent = "Switch to Mobile Mode";
+    }
+    body.dataset.mode = mode; // store current mode
+  }
+
+  // Toggle between modes
+  function toggleMode() {
+    if (document.body.dataset.mode === "mobile") {
+      setMode("desktop");
+    } else {
+      setMode("mobile");
+    }
+  }
+
+  // Helper: turn "the-dylantic-creed.pdf" into "The Dylantic Creed.pdf"
+  function cleanFileName(file) {
+    let base = file.replace(/\.pdf$/i, ""); // remove extension
+    base = base.replace(/[-_]+/g, " ");     // replace dashes/underscores with spaces
+    base = base.replace(/\b\w/g, c => c.toUpperCase()); // capitalize words
+    return base + ".pdf";
+  }
+
+  // Initialize on load
+  window.onload = () => {
+    if (isMobileDevice()) {
+      setMode("mobile");
+    } else {
+      setMode("desktop");
+    }
+  };
 </script>
 </head>
 <body>
@@ -119,7 +153,7 @@
 <h1>Dylantic Church Documents</h1>
 
 <div class="mode-toggle">
-  <button onclick="toggleMode()">Toggle Mobile/Desktop Mode</button>
+  <button id="modeButton" onclick="toggleMode()">Switch to Mobile Mode</button>
 </div>
 
 <script>
@@ -133,12 +167,13 @@
   ];
 
   docs.forEach((doc, index) => {
+    const cleanName = cleanFileName(doc.file);
     document.write(`
     <div class="doc-section">
       <h2>Document ${index + 1}: ${doc.title}</h2>
       <iframe src="https://docs.google.com/gview?embedded=true&url=https://the-dylantic-church.github.io/assets/${doc.file}"></iframe>
       <div class="doc-links">
-        <a href="assets/${doc.file}" download>Download</a>
+        <a href="assets/${doc.file}" download="${cleanName}">Download PDF</a>
         <a href="assets/${doc.file}" target="_blank">Open in New Tab</a>
       </div>
     </div>
