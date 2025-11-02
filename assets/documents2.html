@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" id="viewportMeta" />
+<title>Historical Church Documents</title>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    background: #1c2331;
+    color: #e0e6f0;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #70a1ff;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  }
+  .mode-toggle {
+    display: block;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .mode-toggle button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background: #3d5afe;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  .mode-toggle button:hover {
+    background: #536dfe;
+    transform: scale(1.05);
+  }
+  .doc-section {
+    background: #222c44;
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 3.5rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .doc-section h2 {
+    margin-top: 0;
+    font-size: 1.75rem;
+    color: #a0c4ff;
+    border-bottom: 2px solid #70a1ff;
+    padding-bottom: 0.35rem;
+  }
+  .doc-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .doc-links a {
+    background: #3d5afe;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  .doc-links a:hover {
+    background: #536dfe;
+    transform: scale(1.05);
+  }
+  .iframe-wrapper {
+    width: 100%;
+    height: 620px;
+    border: 1px solid #4a5a8a;
+    background: #121726;
+    border-radius: 14px;
+    margin-top: 1rem;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    pointer-events: auto; /* allow scrolling by default */
+    transition: transform 0.3s ease;
+  }
+  /* Focus Mode */
+  .iframe-wrapper.focus {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s ease forwards;
+  }
+  .iframe-wrapper.focus iframe {
+    width: 100%;
+    height: 100%;
+  }
+  .back-button {
+    display: none;
+    position: absolute;
+    top: 10px; left: 10px;
+    background: #3d5afe;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    z-index: 10000;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  .back-button:hover {
+    background: #536dfe;
+    transform: scale(1.05);
+  }
+  .iframe-wrapper.focus .back-button {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  /* Mobile mode */
+  body.mobile {
+    max-width: 420px;
+    margin: 1rem auto;
+    font-size: 0.95rem;
+  }
+  body.mobile .iframe-wrapper {
+    height: 500px;
+  }
+  @media (max-width: 700px) {
+    h1 { font-size: 2rem; }
+    .doc-section h2 { font-size: 1.4rem; }
+    .iframe-wrapper { height: 500px; }
+  }
+</style>
+</head>
+<body>
+  
+<h1>Dylantic Church Documents</h1>
+
+<div class="mode-toggle">
+  <button id="modeButton">Switch to Mobile Mode</button>
+</div>
+
+<div id="docs-container"></div>
+
+<script>
+  const docs = [
+    { title: "The Nicene Creed", file: "The-Nicene-Creed.pdf" },
+  ];
+  
+  function cleanFileName(file) {
+    let base = file.replace(/\.pdf$/i, "");
+    base = base.replace(/[-_]+/g, " ");
+    base = base.replace(/\b\w/g, c => c.toUpperCase());
+    return base + ".pdf";
+  }
+
+  function enterFocus(wrapper) {
+    wrapper.classList.add("focus");
+  }
+  function exitFocus(wrapper) {
+    wrapper.classList.remove("focus");
+  }
+
+  // Mode toggle (desktop <-> mobile)
+  function setMode(mode) {
+    const body = document.body;
+    const viewportMeta = document.getElementById("viewportMeta");
+    const button = document.getElementById("modeButton");
+
+    if (mode === "mobile") {
+      body.classList.add("mobile");
+      viewportMeta.setAttribute("content", "width=420, initial-scale=1");
+      button.textContent = "Switch to Desktop Mode";
+    } else {
+      body.classList.remove("mobile");
+      viewportMeta.setAttribute("content", "width=device-width, initial-scale=1");
+      button.textContent = "Switch to Mobile Mode";
+    }
+    body.dataset.mode = mode;
+  }
+
+  function toggleMode() {
+    if (document.body.dataset.mode === "mobile") {
+      setMode("desktop");
+    } else {
+      setMode("mobile");
+    }
+  }
+
+  document.getElementById("modeButton").addEventListener("click", toggleMode);
+
+  // Auto-detect mode
+  window.onload = () => {
+    if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      setMode("mobile");
+    } else {
+      setMode("desktop");
+    }
+  };
+
+  const container = document.getElementById("docs-container");
+
+  docs.forEach((doc, index) => {
+    const cleanName = cleanFileName(doc.file);
+    const section = document.createElement("div");
+    section.className = "doc-section";
+
+    section.innerHTML = `
+      <h2>Document ${index + 1}: ${doc.title}</h2>
+      <div class="iframe-wrapper">
+        <button class="back-button">Back</button>
+        <iframe src="https://the-dylantic-church.github.io/assets/${doc.file}" type="application/pdf"></iframe>
+      </div>
+      <div class="doc-links">
+        <a href="https://the-dylantic-church.github.io/assets/${doc.file}" download="${cleanName}">Download PDF</a>
+        <a href="https://the-dylantic-church.github.io/assets/${doc.file}" target="_blank">Open in New Tab</a>
+      </div>
+    `;
+
+    const wrapper = section.querySelector(".iframe-wrapper");
+    const backButton = section.querySelector(".back-button");
+
+    // double-click for focus mode
+    wrapper.addEventListener("dblclick", () => enterFocus(wrapper));
+
+    backButton.addEventListener("click", e => {
+      e.stopPropagation();
+      exitFocus(wrapper);
+    });
+
+    container.appendChild(section);
+  });
+
+  // Escape key closes focus mode
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      const focusWrapper = document.querySelector(".iframe-wrapper.focus");
+      if (focusWrapper) exitFocus(focusWrapper);
+    }
+  });
+</script>
+
+</body>
+</html>
